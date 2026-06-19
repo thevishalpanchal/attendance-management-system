@@ -1,0 +1,31 @@
+package com.attendance.controller;
+
+import com.attendance.dto.dashboard.DashboardSummaryDto;
+import com.attendance.service.DashboardService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/dashboard")
+public class DashboardController {
+
+    private final DashboardService dashboardService;
+
+    public DashboardController(
+            DashboardService dashboardService) {
+
+        this.dashboardService =
+                dashboardService;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','HR')")
+    @GetMapping("/summary")
+    public ResponseEntity<DashboardSummaryDto>
+    getDashboardSummary() {
+
+        return ResponseEntity.ok(
+                dashboardService
+                        .getDashboardSummary());
+    }
+}
