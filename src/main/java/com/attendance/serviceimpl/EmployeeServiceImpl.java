@@ -15,6 +15,7 @@ import com.attendance.repository.EmployeeRepository;
 import com.attendance.repository.RoleRepository;
 import com.attendance.service.EmployeeService;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -27,14 +28,18 @@ private final DepartmentRepository departmentRepository;
 
 private final RoleRepository roleRepository;
 
+private final PasswordEncoder passwordEncoder;
+
 public EmployeeServiceImpl(
         EmployeeRepository employeeRepository,
         DepartmentRepository departmentRepository,
-        RoleRepository roleRepository) {
+        RoleRepository roleRepository,
+        PasswordEncoder passwordEncoder) {
 
     this.employeeRepository = employeeRepository;
     this.departmentRepository = departmentRepository;
     this.roleRepository = roleRepository;
+    this.passwordEncoder = passwordEncoder;
 }
 
 @Override
@@ -160,7 +165,7 @@ public EmployeeResponseDto updateEmployee(Long employeeId,
     employee.setLastName(requestDto.getLastName());
     employee.setEmail(requestDto.getEmail());
     employee.setPhone(requestDto.getPhone());
-    employee.setPassword(requestDto.getPassword());
+    employee.setPassword(passwordEncoder.encode(requestDto.getPassword()));
     employee.setDesignation(requestDto.getDesignation());
     employee.setJoiningDate(requestDto.getJoiningDate());
     employee.setMonthlySalary(requestDto.getMonthlySalary());
