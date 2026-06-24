@@ -68,7 +68,7 @@ public EmployeeResponseDto createEmployee(EmployeeRequestDto requestDto) {
             .lastName(requestDto.getLastName())
             .email(requestDto.getEmail())
             .phone(requestDto.getPhone())
-            .password(requestDto.getPassword())
+            .password(passwordEncoder.encode(requestDto.getPassword()))
             .designation(requestDto.getDesignation())
             .joiningDate(requestDto.getJoiningDate())
             .monthlySalary(requestDto.getMonthlySalary())
