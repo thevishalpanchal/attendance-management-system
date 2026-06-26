@@ -44,6 +44,14 @@ public class AuthServiceImpl implements AuthService {
                                 new ResourceNotFoundException(
                                         "Invalid Email"));
 
+
+		System.out.println("EMAIL = " + requestDto.getEmail());
+		System.out.println("DB EMAIL = " + employee.getEmail());
+		System.out.println("PASSWORD MATCH = " +
+        passwordEncoder.matches(
+                requestDto.getPassword(),
+                employee.getPassword()));
+
         if (!passwordEncoder.matches(
                 requestDto.getPassword(),
                 employee.getPassword())) {
