@@ -165,7 +165,7 @@ public EmployeeResponseDto updateEmployee(Long employeeId,
     employee.setLastName(requestDto.getLastName());
     employee.setEmail(requestDto.getEmail());
     employee.setPhone(requestDto.getPhone());
-    employee.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+    employee.setPassword(requestDto.getPassword());
     employee.setDesignation(requestDto.getDesignation());
     employee.setJoiningDate(requestDto.getJoiningDate());
     employee.setMonthlySalary(requestDto.getMonthlySalary());
